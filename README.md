@@ -55,11 +55,47 @@ Buka [http://localhost:3000](http://localhost:3000) dengan browser Anda untuk me
 
 ## Kustomisasi
 
-Anda dapat menyesuaikan portfolio dengan mengedit:
+Website ini memiliki **2 mode kustomisasi**:
+
+### 🟢 Mode 1: Kustomisasi Mudah (Disarankan untuk Pemula)
+
+Cukup edit file `site.config.ts` di folder root untuk mengubah semua informasi website:
+
+```typescript
+// site.config.ts
+const siteConfig = {
+  personal: {
+    name: "Nama Anda",
+    title: "Full Stack Developer",
+    email: "email@anda.com",
+    // ... dan lainnya
+  },
+  // ...
+};
+```
+
+**Yang dapat dikustomisasi:**
+- ✅ Informasi pribadi (nama, email, lokasi)
+- ✅ Media sosial (GitHub, LinkedIn, Twitter, Instagram, YouTube)
+- ✅ Tentang saya (paragraf, statistik)
+- ✅ Keahlian & kompetensi
+- ✅ Sertifikasi & pencapaian
+- ✅ Proyek portfolio
+- ✅ Testimoni klien
+- ✅ Artikel blog
+- ✅ Navigasi menu
+- ✅ Footer
+
+### 🔵 Mode 2: Kustomisasi Lanjutan (100% Editing)
+
+Untuk developer yang ingin kontrol penuh, edit langsung file-file berikut:
 
 - `app/page.tsx` - Konten utama dan bagian
 - `app/layout.tsx` - Metadata dan tata letak situs
 - `app/globals.css` - Style global dan warna tema
+- `site.config.ts` - Data konfigurasi
+
+📖 **Baca panduan lengkap di [CUSTOMIZATION.md](./CUSTOMIZATION.md)**
 
 ### Area Utama untuk Dipersonalisasi:
 
