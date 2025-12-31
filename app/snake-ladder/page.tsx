@@ -875,7 +875,9 @@ function FirstPersonController({
       // Start at cell 1
       const coords = getPositionCoords(1, FP_SCALE);
       camera.position.set(coords.x, PLAYER_EYE_HEIGHT, coords.z);
-      rotationRef.current = { x: 0, y: 0 };
+      // Face towards position 2 (positive X direction) so player doesn't face a wall
+      // Rotation y = -π/2 rotates 90 degrees clockwise to face positive X
+      rotationRef.current = { x: 0, y: -Math.PI / 2 };
       initializedRef.current = true;
     }
     if (!enabled) {
