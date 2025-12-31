@@ -108,7 +108,7 @@ function calculatePPh21(annualIncome: number, ptkpStatus: PTKPStatus): TaxCalcul
 }
 
 // Calculate PPN (VAT)
-function calculatePPN(amount: number, rate: number = 11): { ppnAmount: number; totalWithPPN: number; priceBeforePPN: number } {
+function calculatePPN(amount: number, rate: number = 12): { ppnAmount: number; totalWithPPN: number; priceBeforePPN: number } {
   const ppnAmount = amount * (rate / 100);
   return {
     ppnAmount,
@@ -159,8 +159,8 @@ function TaxInfoSection() {
           <div className="bg-slate-700 rounded-lg p-3">
             <h4 className="text-sm font-semibold text-white mb-2">Tarif PPN:</h4>
             <ul className="text-xs text-slate-300 space-y-1">
-              <li>• 11% (tarif umum sejak April 2022)</li>
-              <li>• 12% (mulai 1 Januari 2025)</li>
+              <li>• 12% (tarif umum sejak 1 Januari 2025)</li>
+              <li>• 11% (tarif sebelumnya, April 2022 - Desember 2024)</li>
               <li>• 0% untuk ekspor BKP/JKP</li>
             </ul>
           </div>
@@ -392,7 +392,7 @@ function PPh21Calculator() {
 // PPN Calculator Component
 function PPNCalculator() {
   const [amount, setAmount] = useState('');
-  const [ppnRate, setPpnRate] = useState(11);
+  const [ppnRate, setPpnRate] = useState(12);
   const [calculationType, setCalculationType] = useState<'add' | 'extract'>('add');
   
   const result = useMemo(() => {
@@ -486,7 +486,7 @@ function PPNCalculator() {
             />
             <div className="flex justify-between text-xs text-slate-400 mt-1">
               <span>0%</span>
-              <span className="text-green-400">11% (saat ini)</span>
+              <span className="text-green-400">12% (saat ini)</span>
               <span>15%</span>
             </div>
           </div>
