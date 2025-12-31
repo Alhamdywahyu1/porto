@@ -151,13 +151,13 @@ const siteConfig: SiteConfig = {
   
   // ==================== INFORMASI PRIBADI ====================
   personal: {
-    name: "Nama Anda",                    // Ganti dengan nama Anda
-    initials: "P",                        // Ganti dengan inisial Anda
-    title: "Pengembang Full Stack & Desainer",  // Ganti dengan jabatan Anda
-    subtitle: "Menciptakan pengalaman web yang indah dan fungsional dengan teknologi modern",
-    email: "your.email@example.com",      // Ganti dengan email Anda
+    name: "Alhamdy Wahyu Alfiansyah",                    // Ganti dengan nama Anda
+    initials: "Alhamdy",                        // Ganti dengan inisial Anda
+    title: "mahasiswa semester 6 IT Universitas Trunojoyo Madura",  // Ganti dengan jabatan Anda
+    subtitle: "mempelajari dan mendalai sekaligus menerapkan sistem automasi di kehidupan sehari hari",
+    email: "hamdialfian1@gmail.com",      // Ganti dengan email Anda
     location: {
-      city: "Jakarta",                    // Ganti dengan kota Anda
+      city: "Bangkalan",                    // Ganti dengan kota Anda
       country: "Indonesia",               // Ganti dengan negara Anda
     },
     resumeUrl: "/resume.pdf",             // Path ke file CV Anda
@@ -246,17 +246,6 @@ const siteConfig: SiteConfig = {
   
   // ==================== PROYEK ====================
   projects: [
-    {
-      icon: "🚀",
-      title: "Platform E-Commerce",
-      description: "Solusi e-commerce full-stack dengan integrasi pembayaran, manajemen keranjang, dan dashboard admin",
-      tags: ["React", "Node.js", "MongoDB"],
-      tagColor: "blue",
-      gradientFrom: "blue-500",
-      gradientTo: "purple-600",
-      githubUrl: "https://github.com/yourusername/project",
-      demoUrl: "https://project-demo.com",
-    },
     {
       icon: "📱",
       title: "Desain Aplikasi Mobile",
