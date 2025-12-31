@@ -560,6 +560,9 @@ function Board3D({
 }
 
 // 3D Number Component - Creates layered text for 3D effect
+const LAYERS_ARRAY = [0, 1, 2, 3, 4]; // Pre-computed array for layers
+const LAYER_DEPTH = 0.08; // Total depth
+
 function Number3D({ 
   value, 
   position: pos, 
@@ -571,24 +574,27 @@ function Number3D({
 }) {
   const groupRef = useRef<THREE.Group>(null);
   const { camera } = useThree();
+  const lastCameraPos = useRef(new THREE.Vector3());
   
   // Make the number always face the camera (billboard effect)
+  // Only update when camera moves significantly
   useFrame(() => {
     if (groupRef.current) {
-      groupRef.current.lookAt(camera.position);
+      const cameraMoved = lastCameraPos.current.distanceToSquared(camera.position) > 0.01;
+      if (cameraMoved) {
+        groupRef.current.lookAt(camera.position);
+        lastCameraPos.current.copy(camera.position);
+      }
     }
   });
-  
-  const layers = 5; // Number of layers for 3D depth effect
-  const depth = 0.08; // Total depth
   
   return (
     <group ref={groupRef} position={pos}>
       {/* Create multiple layers for 3D depth effect */}
-      {Array.from({ length: layers }).map((_, i) => (
+      {LAYERS_ARRAY.map((i) => (
         <Text
           key={i}
-          position={[0, 0, -i * (depth / layers)]}
+          position={[0, 0, -i * (LAYER_DEPTH / LAYERS_ARRAY.length)]}
           fontSize={fontSize}
           color={i === 0 ? "white" : "#888888"}
           anchorX="center"
@@ -601,7 +607,7 @@ function Number3D({
       ))}
       {/* Back face */}
       <Text
-        position={[0, 0, -depth]}
+        position={[0, 0, -LAYER_DEPTH]}
         fontSize={fontSize}
         color="#555555"
         anchorX="center"
