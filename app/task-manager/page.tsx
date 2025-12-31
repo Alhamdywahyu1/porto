@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 
 // Types
@@ -217,40 +217,31 @@ function TaskFormModal({
   });
   const [tagInput, setTagInput] = useState('');
   
-  // Reset form when task changes
-  useState(() => {
-    if (task) {
-      setFormData({
-        title: task.title,
-        description: task.description,
-        status: task.status,
-        priority: task.priority,
-        dueDate: task.dueDate,
-        tags: task.tags,
-      });
-    } else {
-      setFormData({
-        title: '',
-        description: '',
-        status: 'todo',
-        priority: 'medium',
-        dueDate: null,
-        tags: [],
-      });
+  // Reset form when task changes or modal opens
+  useEffect(() => {
+    if (isOpen) {
+      if (task) {
+        setFormData({
+          title: task.title,
+          description: task.description,
+          status: task.status,
+          priority: task.priority,
+          dueDate: task.dueDate,
+          tags: task.tags,
+        });
+      } else {
+        setFormData({
+          title: '',
+          description: '',
+          status: 'todo',
+          priority: 'medium',
+          dueDate: null,
+          tags: [],
+        });
+      }
+      setTagInput('');
     }
-  });
-  
-  // Update form when modal opens
-  if (isOpen && task && formData.title !== task.title) {
-    setFormData({
-      title: task.title,
-      description: task.description,
-      status: task.status,
-      priority: task.priority,
-      dueDate: task.dueDate,
-      tags: task.tags,
-    });
-  }
+  }, [isOpen, task]);
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
