@@ -418,9 +418,7 @@ function Snake3D({ start, end, scale = 1, elevated = false }: { start: number; e
   );
 }
 
-// Ladder 3D Component - Height proportional to distance
-const LADDER_HEIGHT_RATIO = 0.25; // Ratio of horizontal distance to ladder height (reduced for better proportions)
-
+// Ladder 3D Component - Flat along board surface with gentle arc (like a rope bridge)
 function Ladder3D({ start, end, scale = 1, elevated = false }: { start: number; end: number; scale?: number; elevated?: boolean }) {
   const startCoords = getPositionCoords(start, scale);
   const endCoords = getPositionCoords(end, scale);
@@ -433,21 +431,41 @@ function Ladder3D({ start, end, scale = 1, elevated = false }: { start: number; 
   const horizontalLength = Math.sqrt(dx * dx + dz * dz);
   const angle = Math.atan2(dx, dz);
   
-  // Ladder height proportional to horizontal distance (not too tall)
-  const ladderHeight = horizontalLength * LADDER_HEIGHT_RATIO;
-  
   // Calculate perpendicular direction for rail spacing
-  const perpX = -Math.cos(angle) * 0.12 * scale;
-  const perpZ = Math.sin(angle) * 0.12 * scale;
+  const railSpacing = 0.12 * scale;
+  const perpX = -Math.cos(angle) * railSpacing;
+  const perpZ = Math.sin(angle) * railSpacing;
   
+  // Create curved path points for rails (gentle arc above board)
+  const numSegments = 20;
+  const leftRailPoints: THREE.Vector3[] = [];
+  const rightRailPoints: THREE.Vector3[] = [];
+  
+  for (let i = 0; i <= numSegments; i++) {
+    const t = i / numSegments;
+    const x = startCoords.x + dx * t;
+    const z = startCoords.z + dz * t;
+    // Gentle arc - higher in the middle
+    const arcHeight = Math.sin(t * Math.PI) * 0.3 * scale;
+    const y = 0.1 * scale + arcHeight + elevationOffset;
+    
+    leftRailPoints.push(new THREE.Vector3(x + perpX, y, z + perpZ));
+    rightRailPoints.push(new THREE.Vector3(x - perpX, y, z - perpZ));
+  }
+  
+  const leftCurve = new THREE.CatmullRomCurve3(leftRailPoints);
+  const rightCurve = new THREE.CatmullRomCurve3(rightRailPoints);
+  
+  // Create rungs
   const rungs = [];
-  const numRungs = Math.max(3, Math.floor(horizontalLength / (0.6 * scale)));
+  const numRungs = Math.max(4, Math.floor(horizontalLength / (0.5 * scale)));
   
   for (let i = 1; i < numRungs; i++) {
     const t = i / numRungs;
     const x = startCoords.x + dx * t;
     const z = startCoords.z + dz * t;
-    const y = 0.1 * scale + t * ladderHeight + elevationOffset;
+    const arcHeight = Math.sin(t * Math.PI) * 0.3 * scale;
+    const y = 0.1 * scale + arcHeight + elevationOffset;
     
     rungs.push(
       <mesh
@@ -455,37 +473,24 @@ function Ladder3D({ start, end, scale = 1, elevated = false }: { start: number; 
         position={[x, y, z]}
         rotation={[0, angle, 0]}
       >
-        <boxGeometry args={[0.28 * scale, 0.03 * scale, 0.03 * scale]} />
+        <boxGeometry args={[railSpacing * 2.2, 0.04 * scale, 0.04 * scale]} />
         <meshStandardMaterial color="#a16207" roughness={0.5} />
       </mesh>
     );
   }
   
-  // Rail length calculation (diagonal length considering height)
-  const railLength = Math.sqrt(horizontalLength * horizontalLength + ladderHeight * ladderHeight) * 1.05;
-  const railMidX = (startCoords.x + endCoords.x) / 2;
-  const railMidZ = (startCoords.z + endCoords.z) / 2;
-  const railMidY = 0.1 * scale + ladderHeight / 2 + elevationOffset;
-  
-  // Calculate tilt angle based on height and distance
-  const tiltAngle = Math.atan2(ladderHeight, horizontalLength);
+  const railRadius = 0.03 * scale;
   
   return (
     <group>
-      {/* Left rail */}
-      <mesh 
-        position={[railMidX + perpX, railMidY, railMidZ + perpZ]}
-        rotation={[tiltAngle, 0, -angle + Math.PI / 2]}
-      >
-        <cylinderGeometry args={[0.025 * scale, 0.025 * scale, railLength, 8]} />
+      {/* Left rail - curved tube */}
+      <mesh>
+        <tubeGeometry args={[leftCurve, 32, railRadius, 8, false]} />
         <meshStandardMaterial color="#854d0e" roughness={0.5} />
       </mesh>
-      {/* Right rail */}
-      <mesh 
-        position={[railMidX - perpX, railMidY, railMidZ - perpZ]}
-        rotation={[tiltAngle, 0, -angle + Math.PI / 2]}
-      >
-        <cylinderGeometry args={[0.025 * scale, 0.025 * scale, railLength, 8]} />
+      {/* Right rail - curved tube */}
+      <mesh>
+        <tubeGeometry args={[rightCurve, 32, railRadius, 8, false]} />
         <meshStandardMaterial color="#854d0e" roughness={0.5} />
       </mesh>
       {rungs}
@@ -550,6 +555,66 @@ function Board3D({
       {Object.entries(LADDERS).map(([start, end]) => (
         <Ladder3D key={`ladder-${start}`} start={parseInt(start)} end={end} scale={scale} />
       ))}
+    </group>
+  );
+}
+
+// 3D Number Component - Creates layered text for 3D effect
+const LAYERS_ARRAY = [0, 1, 2, 3, 4]; // Pre-computed array for layers
+const LAYER_DEPTH = 0.08; // Total depth
+
+function Number3D({ 
+  value, 
+  position: pos, 
+  fontSize = 0.8 
+}: { 
+  value: number; 
+  position: [number, number, number]; 
+  fontSize?: number;
+}) {
+  const groupRef = useRef<THREE.Group>(null);
+  const { camera } = useThree();
+  const lastCameraPos = useRef(new THREE.Vector3());
+  
+  // Make the number always face the camera (billboard effect)
+  // Only update when camera moves significantly
+  useFrame(() => {
+    if (groupRef.current) {
+      const cameraMoved = lastCameraPos.current.distanceToSquared(camera.position) > 0.01;
+      if (cameraMoved) {
+        groupRef.current.lookAt(camera.position);
+        lastCameraPos.current.copy(camera.position);
+      }
+    }
+  });
+  
+  return (
+    <group ref={groupRef} position={pos}>
+      {/* Create multiple layers for 3D depth effect */}
+      {LAYERS_ARRAY.map((i) => (
+        <Text
+          key={i}
+          position={[0, 0, -i * (LAYER_DEPTH / LAYERS_ARRAY.length)]}
+          fontSize={fontSize}
+          color={i === 0 ? "white" : "#888888"}
+          anchorX="center"
+          anchorY="middle"
+          outlineWidth={i === 0 ? 0.03 : 0}
+          outlineColor="black"
+        >
+          {value.toString()}
+        </Text>
+      ))}
+      {/* Back face */}
+      <Text
+        position={[0, 0, -LAYER_DEPTH]}
+        fontSize={fontSize}
+        color="#555555"
+        anchorX="center"
+        anchorY="middle"
+      >
+        {value.toString()}
+      </Text>
     </group>
   );
 }
@@ -627,19 +692,8 @@ function FPCell3D({
         <meshStandardMaterial color={color} />
       </mesh>
       
-      {/* Upright number text */}
-      <Text
-        position={[0, 0.5, 0]}
-        rotation={[0, 0, 0]}
-        fontSize={0.8}
-        color="white"
-        anchorX="center"
-        anchorY="middle"
-        outlineWidth={0.05}
-        outlineColor="black"
-      >
-        {position.toString()}
-      </Text>
+      {/* 3D Number that faces the camera */}
+      <Number3D value={position} position={[0, 0.6, 0]} fontSize={0.9} />
       
       {/* Row separator walls - placed between rows, NOT at turn points */}
       {showRowSeparator && (
@@ -908,11 +962,9 @@ function Scene({
       
       {mode === 2 && (
         <OrbitControls 
-          enablePan={true}
-          enableZoom={true}
+          enablePan={false}
+          enableZoom={false}
           enableRotate={true}
-          minDistance={5}
-          maxDistance={20}
           target={[0, 0, 0]}
         />
       )}
@@ -922,7 +974,8 @@ function Scene({
       )}
       
       {mode === 2 && (
-        <PerspectiveCamera makeDefault position={[8, 10, 8]} fov={60} />
+        // Top-down view like 2D mode, at fixed distance
+        <PerspectiveCamera makeDefault position={[0, 12, 0.1]} fov={60} />
       )}
       
       {mode === 3 && (() => {
@@ -1268,6 +1321,12 @@ export default function SnakeLadderGame() {
           </button>
         </div>
         
+        {mode === 2 && (
+          <p className="text-center text-yellow-400 mt-2 text-sm">
+            🖱️ Drag dengan mouse untuk memutar papan. Klik dan geser untuk melihat dari sudut berbeda.
+          </p>
+        )}
+        
         {mode === 3 && (
           <p className="text-center text-yellow-400 mt-2 text-sm">
             Click on the game area and use WASD or Arrow keys to move. Mouse to look around.
@@ -1427,6 +1486,19 @@ export default function SnakeLadderGame() {
           </div>
         </div>
       </div>
+      
+      {/* Instructions Modal for Mode 2 */}
+      {mode === 2 && (
+        <div className="fixed bottom-4 right-4 bg-slate-800 border border-slate-600 rounded-lg p-4 max-w-xs">
+          <h3 className="font-semibold text-white mb-2">Kontrol (Mode 2)</h3>
+          <ul className="text-sm text-slate-300 space-y-1">
+            <li>• 🖱️ Klik & Geser: Putar papan</li>
+            <li>• Klik kiri + geser: Rotasi horizontal</li>
+            <li>• Klik kiri + geser vertikal: Rotasi vertikal</li>
+            <li>• Tampilan awal: Atas ke bawah seperti 2D</li>
+          </ul>
+        </div>
+      )}
       
       {/* Instructions Modal for Mode 3 */}
       {mode === 3 && (
