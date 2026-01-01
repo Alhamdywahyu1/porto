@@ -113,16 +113,16 @@ export interface SiteConfig {
   skills: Skill[];
   
   // ==================== SERTIFIKASI & PENCAPAIAN ====================
-  certifications: Certification[];
+  // certifications: Certification[];
   
   // ==================== PROYEK ====================
   projects: Project[];
   
   // ==================== TESTIMONI ====================
-  testimonials: Testimonial[];
+  // testimonials: Testimonial[];
   
   // ==================== BLOG ====================
-  blogPosts: BlogPost[];
+  // blogPosts: BlogPost[];
   
   // ==================== NAVIGASI ====================
   navigation: {
