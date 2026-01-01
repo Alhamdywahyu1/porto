@@ -369,37 +369,11 @@ const siteConfig: SiteConfig = {
   //     gradientTo: "red-600",
   //   },
   // ],
-  
-  // ==================== BLOG ====================
-  // blogPosts: [
-  //   {
-  //     title: "Membangun Aplikasi Web yang Skalabel",
-  //     excerpt: "Pelajari praktik terbaik untuk membangun aplikasi web yang dapat menskalakan jutaan pengguna...",
-  //     date: "15 Des, 2024",
-  //     readTime: "5 menit baca",
-  //     gradientFrom: "blue-500",
-  //     gradientTo: "purple-600",
-  //     url: "#",
-  //   },
-  //   {
-  //     title: "Optimisasi Performa React",
-  //     excerpt: "Temukan teknik lanjutan untuk mengoptimalkan aplikasi React Anda agar performa lebih baik...",
-  //     date: "10 Des, 2024",
-  //     readTime: "8 menit baca",
-  //     gradientFrom: "green-500",
-  //     gradientTo: "teal-600",
-  //     url: "#",
-  //   },
-  //   {
-  //     title: "Memulai dengan TypeScript",
-  //     excerpt: "Panduan lengkap TypeScript untuk developer JavaScript yang ingin meningkatkan kemampuan...",
-  //     date: "5 Des, 2024",
-  //     readTime: "6 menit baca",
-  //     gradientFrom: "orange-500",
-  //     gradientTo: "red-600",
-  //     url: "#",
-  //   },
-  // ],
+
+  // Add empty arrays for optional sections to satisfy type expectations
+  certifications: [],
+  testimonials: [],
+  blogPosts: [],
   
   // ==================== NAVIGASI ====================
   navigation: {
