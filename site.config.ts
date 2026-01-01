@@ -146,13 +146,13 @@ export interface SiteConfig {
 const siteConfig: SiteConfig = {
   // ==================== INFORMASI DASAR ====================
   siteName: "Portfolio",
-  siteDescription: "Portfolio profesional yang menampilkan proyek pengembangan web, keahlian, sertifikasi, testimoni, dan artikel teknis. Spesialisasi dalam React, Next.js, TypeScript, dan teknologi web modern.",
+  siteDescription: "Portfolio yang menampilkan proyek, keahlian. Spesialisasi dalam React, Next.js, TypeScript, dan teknologi web modern.",
   language: "id",
   
   // ==================== INFORMASI PRIBADI ====================
   personal: {
     name: "Alhamdy Wahyu Alfiansyah",                    // Ganti dengan nama Anda
-    initials: "Alhamdy",                        // Ganti dengan inisial Anda
+    initials: "hamdy",                        // Ganti dengan inisial Anda
     title: "mahasiswa semester 6 IT Universitas Trunojoyo Madura",  // Ganti dengan jabatan Anda
     subtitle: "mempelajari dan mendalai sekaligus menerapkan sistem automasi di kehidupan sehari hari",
     email: "hamdialfian1@gmail.com",      // Ganti dengan email Anda
@@ -167,7 +167,7 @@ const siteConfig: SiteConfig = {
   
   // ==================== TAUTAN SOSIAL ====================
   social: {
-    github: "https://github.com/yourusername",        // Ganti dengan GitHub Anda
+    github: "https://github.com/Alhamdywahyu1",        // Ganti dengan GitHub Anda
     linkedin: "https://linkedin.com/in/yourprofile",  // Ganti dengan LinkedIn Anda
     twitter: "https://twitter.com/yourusername",      // Ganti dengan Twitter Anda
     // instagram: "https://instagram.com/yourusername",  // Uncomment jika ingin menambahkan
@@ -178,14 +178,14 @@ const siteConfig: SiteConfig = {
   // ==================== BAGIAN TENTANG ====================
   about: {
     paragraphs: [
-      "Saya adalah pengembang yang bersemangat dengan keahlian dalam membangun aplikasi web modern. Saya senang menciptakan antarmuka pengguna yang intuitif dan sistem backend yang tangguh.",
-      "Dengan pengalaman beberapa tahun dalam pengembangan web, saya mengkhususkan diri dalam React, Next.js, Node.js, dan berbagai teknologi modern lainnya.",
-      "Saat tidak sedang coding, Anda bisa menemukan saya mengeksplorasi teknologi baru, berkontribusi pada open source, atau berbagi pengetahuan dengan komunitas developer.",
+      "Saya adalah mahasiswa yang bersemangat dengan keahlian dalam membangun aplikasi. Saya senang menciptakan antarmuka pengguna yang intuitif dan sistem backend yang tangguh.",
+      "Dengan pengalaman dalam beberapa proyek matakuliah dan proyek magang, saya mengkhususkan diri dalam React, Next.js, Node.js, dan berbagai teknologi modern lainnya.",
+      "saat memiliki waktu luang saya cenderung belajar tentang sesuatu yang saya sukai, meskipun sesekali bermain game atau melihat film untuk menghilangkan jenuh",
     ],
     stats: [
-      { title: "Pengalaman", value: "5+ Tahun dalam Pengembangan Web" },
-      { title: "Proyek", value: "50+ Proyek Selesai" },
-      { title: "Klien", value: "30+ Klien Puas" },
+      { title: "Pengalaman", value: "2+ Tahun belajar Pengembangan Web" },
+      { title: "Proyek", value: "8+ Proyek Selesai" },
+      // { title: "Klien", value: "30+ Klien Puas" },
     ],
   },
   
@@ -204,70 +204,70 @@ const siteConfig: SiteConfig = {
     {
       icon: "🛠️",
       title: "Alat & Tools",
-      items: ["Git & GitHub", "Docker", "VS Code", "Figma"],
+      items: ["Git & GitHub", "word", "VS Code", "Figma"],
     },
   ],
   
   // ==================== SERTIFIKASI & PENCAPAIAN ====================
-  certifications: [
-    {
-      icon: "🏆",
-      title: "AWS Certified Developer",
-      issuer: "Amazon Web Services",
-      year: "2023",
-      description: "Mendemonstrasikan kemahiran dalam mengembangkan dan memelihara aplikasi di platform AWS",
-      borderColor: "blue",
-    },
-    {
-      icon: "🎓",
-      title: "Google Cloud Professional",
-      issuer: "Google Cloud Platform",
-      year: "2023",
-      description: "Tersertifikasi dalam merancang, membangun, dan mengelola solusi di GCP",
-      borderColor: "green",
-    },
-    {
-      icon: "⭐",
-      title: "React Advanced Certification",
-      issuer: "Meta",
-      year: "2023",
-      description: "Konsep lanjutan dalam React termasuk hooks, context, dan optimisasi performa",
-      borderColor: "purple",
-    },
-    {
-      icon: "🥇",
-      title: "Juara Hackathon 2023",
-      issuer: "Tech Innovation Challenge - Juara 1",
-      year: "",
-      description: "Membangun solusi berbasis AI untuk pembangunan berkelanjutan",
-      borderColor: "orange",
-    },
-  ],
+  // certifications: [
+  //   {
+  //     icon: "🏆",
+  //     title: "AWS Certified Developer",
+  //     issuer: "Amazon Web Services",
+  //     year: "2023",
+  //     description: "Mendemonstrasikan kemahiran dalam mengembangkan dan memelihara aplikasi di platform AWS",
+  //     borderColor: "blue",
+  //   },
+  //   {
+  //     icon: "🎓",
+  //     title: "Google Cloud Professional",
+  //     issuer: "Google Cloud Platform",
+  //     year: "2023",
+  //     description: "Tersertifikasi dalam merancang, membangun, dan mengelola solusi di GCP",
+  //     borderColor: "green",
+  //   },
+  //   {
+  //     icon: "⭐",
+  //     title: "React Advanced Certification",
+  //     issuer: "Meta",
+  //     year: "2023",
+  //     description: "Konsep lanjutan dalam React termasuk hooks, context, dan optimisasi performa",
+  //     borderColor: "purple",
+  //   },
+  //   {
+  //     icon: "🥇",
+  //     title: "Juara Hackathon 2023",
+  //     issuer: "Tech Innovation Challenge - Juara 1",
+  //     year: "",
+  //     description: "Membangun solusi berbasis AI untuk pembangunan berkelanjutan",
+  //     borderColor: "orange",
+  //   },
+  // ],
   
   // ==================== PROYEK ====================
   projects: [
-    {
-      icon: "📱",
-      title: "Desain Aplikasi Mobile",
-      description: "Desain UI/UX modern untuk aplikasi media sosial dengan fitur real-time",
-      tags: ["Figma", "React Native", "Firebase"],
-      tagColor: "green",
-      gradientFrom: "green-500",
-      gradientTo: "teal-600",
-      githubUrl: "https://github.com/yourusername/project",
-      demoUrl: "https://project-demo.com",
-    },
-    {
-      icon: "🎨",
-      title: "Website Portfolio",
-      description: "Situs portfolio indah yang dibangun dengan Next.js menampilkan mode gelap dan animasi",
-      tags: ["Next.js", "Tailwind", "TypeScript"],
-      tagColor: "orange",
-      gradientFrom: "orange-500",
-      gradientTo: "red-600",
-      githubUrl: "https://github.com/yourusername/project",
-      demoUrl: "https://project-demo.com",
-    },
+    // {
+    //   icon: "📱",
+    //   title: "Desain Aplikasi Mobile",
+    //   description: "Desain UI/UX modern untuk aplikasi media sosial dengan fitur real-time",
+    //   tags: ["Figma", "React Native", "Firebase"],
+    //   tagColor: "green",
+    //   gradientFrom: "green-500",
+    //   gradientTo: "teal-600",
+    //   githubUrl: "https://github.com/yourusername/project",
+    //   demoUrl: "https://project-demo.com",
+    // },
+    // {
+    //   icon: "🎨",
+    //   title: "Website Portfolio",
+    //   description: "Situs portfolio indah yang dibangun dengan Next.js menampilkan mode gelap dan animasi",
+    //   tags: ["Next.js", "Tailwind", "TypeScript"],
+    //   tagColor: "orange",
+    //   gradientFrom: "orange-500",
+    //   gradientTo: "red-600",
+    //   githubUrl: "https://github.com/yourusername/project",
+    //   demoUrl: "https://project-demo.com",
+    // },
     {
       icon: "🎲",
       title: "Permainan Ular Tangga 3D",
@@ -337,69 +337,69 @@ const siteConfig: SiteConfig = {
   ],
   
   // ==================== TESTIMONI ====================
-  testimonials: [
-    {
-      initials: "BD",
-      name: "Budi Dharma",
-      role: "CEO",
-      company: "TechCorp",
-      rating: 5,
-      text: "Pekerjaan luar biasa! Proyek selesai tepat waktu dan melebihi ekspektasi kami. Komunikasi dan kemampuan teknis yang sangat baik.",
-      gradientFrom: "blue-500",
-      gradientTo: "purple-600",
-    },
-    {
-      initials: "SR",
-      name: "Sari Rahmawati",
-      role: "Product Manager",
-      company: "",
-      rating: 5,
-      text: "Sangat menyenangkan bekerja sama! Sangat profesional dan berorientasi pada detail. Hasil akhir persis seperti yang kami butuhkan.",
-      gradientFrom: "green-500",
-      gradientTo: "teal-600",
-    },
-    {
-      initials: "AW",
-      name: "Andi Wijaya",
-      role: "Founder",
-      company: "Startup",
-      rating: 5,
-      text: "Developer yang luar biasa! Membangun MVP kami dalam waktu singkat dengan kode yang bersih dan mudah dipelihara. Sangat direkomendasikan!",
-      gradientFrom: "orange-500",
-      gradientTo: "red-600",
-    },
-  ],
+  // testimonials: [
+  //   {
+  //     initials: "BD",
+  //     name: "Budi Dharma",
+  //     role: "CEO",
+  //     company: "TechCorp",
+  //     rating: 5,
+  //     text: "Pekerjaan luar biasa! Proyek selesai tepat waktu dan melebihi ekspektasi kami. Komunikasi dan kemampuan teknis yang sangat baik.",
+  //     gradientFrom: "blue-500",
+  //     gradientTo: "purple-600",
+  //   },
+  //   {
+  //     initials: "SR",
+  //     name: "Sari Rahmawati",
+  //     role: "Product Manager",
+  //     company: "",
+  //     rating: 5,
+  //     text: "Sangat menyenangkan bekerja sama! Sangat profesional dan berorientasi pada detail. Hasil akhir persis seperti yang kami butuhkan.",
+  //     gradientFrom: "green-500",
+  //     gradientTo: "teal-600",
+  //   },
+  //   {
+  //     initials: "AW",
+  //     name: "Andi Wijaya",
+  //     role: "Founder",
+  //     company: "Startup",
+  //     rating: 5,
+  //     text: "Developer yang luar biasa! Membangun MVP kami dalam waktu singkat dengan kode yang bersih dan mudah dipelihara. Sangat direkomendasikan!",
+  //     gradientFrom: "orange-500",
+  //     gradientTo: "red-600",
+  //   },
+  // ],
   
   // ==================== BLOG ====================
-  blogPosts: [
-    {
-      title: "Membangun Aplikasi Web yang Skalabel",
-      excerpt: "Pelajari praktik terbaik untuk membangun aplikasi web yang dapat menskalakan jutaan pengguna...",
-      date: "15 Des, 2024",
-      readTime: "5 menit baca",
-      gradientFrom: "blue-500",
-      gradientTo: "purple-600",
-      url: "#",
-    },
-    {
-      title: "Optimisasi Performa React",
-      excerpt: "Temukan teknik lanjutan untuk mengoptimalkan aplikasi React Anda agar performa lebih baik...",
-      date: "10 Des, 2024",
-      readTime: "8 menit baca",
-      gradientFrom: "green-500",
-      gradientTo: "teal-600",
-      url: "#",
-    },
-    {
-      title: "Memulai dengan TypeScript",
-      excerpt: "Panduan lengkap TypeScript untuk developer JavaScript yang ingin meningkatkan kemampuan...",
-      date: "5 Des, 2024",
-      readTime: "6 menit baca",
-      gradientFrom: "orange-500",
-      gradientTo: "red-600",
-      url: "#",
-    },
-  ],
+  // blogPosts: [
+  //   {
+  //     title: "Membangun Aplikasi Web yang Skalabel",
+  //     excerpt: "Pelajari praktik terbaik untuk membangun aplikasi web yang dapat menskalakan jutaan pengguna...",
+  //     date: "15 Des, 2024",
+  //     readTime: "5 menit baca",
+  //     gradientFrom: "blue-500",
+  //     gradientTo: "purple-600",
+  //     url: "#",
+  //   },
+  //   {
+  //     title: "Optimisasi Performa React",
+  //     excerpt: "Temukan teknik lanjutan untuk mengoptimalkan aplikasi React Anda agar performa lebih baik...",
+  //     date: "10 Des, 2024",
+  //     readTime: "8 menit baca",
+  //     gradientFrom: "green-500",
+  //     gradientTo: "teal-600",
+  //     url: "#",
+  //   },
+  //   {
+  //     title: "Memulai dengan TypeScript",
+  //     excerpt: "Panduan lengkap TypeScript untuk developer JavaScript yang ingin meningkatkan kemampuan...",
+  //     date: "5 Des, 2024",
+  //     readTime: "6 menit baca",
+  //     gradientFrom: "orange-500",
+  //     gradientTo: "red-600",
+  //     url: "#",
+  //   },
+  // ],
   
   // ==================== NAVIGASI ====================
   navigation: {
@@ -416,7 +416,7 @@ const siteConfig: SiteConfig = {
   
   // ==================== FOOTER ====================
   footer: {
-    copyright: "© 2024 Portfolio.",
+    copyright: "© 2026 Portfolio by Alhamdy Wahyu Alfianysah.",
     builtWith: "Dibangun dengan Next.js dan Tailwind CSS.",
   },
 };
